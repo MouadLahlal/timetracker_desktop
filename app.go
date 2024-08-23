@@ -3,9 +3,11 @@ package main
 import (
 	"context"
 	"fmt"
+	"os"
 	"database/sql"
 	
 	_ "github.com/mattn/go-sqlite3"
+	_ "github.com/joho/godotenv/autoload"
 )
 
 // App struct
@@ -36,7 +38,7 @@ type Record struct {
 }
 
 func (a *App) GetTodayUsage() []Record {
-	db, err := sql.Open("sqlite3", "/home/mouad/Documents/dev/timetracker_daemon/timetracker.db")
+	db, err := sql.Open("sqlite3", os.Getenv("DB_PATH"))
 	if err != nil {
 		panic(err)
 	}
